@@ -1,0 +1,358 @@
+#include<iostream>
+using namespace std;
+class cll;
+class Node{
+    int val;
+   
+    Node *next;
+    public:
+    Node(int a){
+        val=a;
+        
+        next=NULL;
+    }
+    friend class cll;
+
+};
+class cll{
+    Node* head;
+   
+    public:
+    cll(){
+        head=NULL;
+
+    }
+    
+    
+
+    void insertFirst(int val){
+        Node* temp= new Node(val);
+        if(head==NULL){
+            head=temp;
+            temp->next=head;
+            
+            
+            
+            
+
+        }
+        else{
+        
+            
+
+            Node* temp1=head;
+            temp1=temp1->next;
+            while(temp1->next!=head){
+            temp1=temp1->next;
+              }
+            temp->next=head;
+            temp1->next=temp;
+            
+    
+            head=temp;
+            
+            
+
+             
+        
+            
+        }
+    }
+
+    void insertBack(int val){
+        Node* temp= new Node(val);
+        if(head==NULL){
+            
+            
+            head=temp;
+            temp->next=head;
+            
+            
+
+        }
+        else{
+            Node* temp1=head;
+            temp1=temp1->next;
+
+            while(temp1->next!=head){
+                temp1=temp1->next;
+            }
+            temp->next=head;
+            temp1->next=temp;
+            
+
+            
+        }
+    }
+
+    void insertAfter(int a,int key){
+        Node* temp= new Node(a);
+        Node* temp1=head;
+        if(head==NULL){
+            
+            
+            cout<<"List is empty"<<endl;
+            
+
+        }
+        else{
+            
+            if(temp1->val==key){
+                temp->next=temp1->next;
+                temp1->next=temp;
+            }
+            else{
+                temp1=temp1->next;
+            
+            while(temp1!=head){
+                if(temp1->val==key){
+                    temp->next=temp1->next;
+                    temp1->next=temp;
+                    
+                    cout<<"Element inserted after "<<key<<endl;
+                    break;
+                }
+                else{
+                    temp1=temp1->next;
+                }
+            }
+            if(temp1==head){
+                cout<<"Element not found"<<endl;
+
+            }
+        }}
+
+    }
+    void search(int a){
+        Node* temp=head;
+        if(temp->val==a){
+            cout<<"Element is present in the list."<<endl;
+                
+                
+            }
+            else{
+                temp=temp->next;
+        while(temp!=head){
+            if(temp->val==a){
+                cout<<"Element is present in the list."<<endl;
+                break;
+            }
+            else{
+                temp=temp->next;
+            }
+            
+
+        }
+        if(temp==head){
+             cout<<"Element is not present in the list."<<endl;
+        }}
+    }
+    void deleteBeg(){
+        if(head==NULL){
+            
+            
+            cout<<"List is empty"<<endl;
+            return;
+            
+
+        }
+        Node*temp=head;
+        Node* temp1=head;
+        temp1=temp1->next;
+
+        while(temp1->next!=head){
+            temp1=temp1->next;
+        }
+        if(head->next!=head){
+        head=head->next;}
+        temp1->next=head;
+        
+
+        temp->next=NULL;
+        delete temp;
+    }
+
+    void deleteEnd(){
+        if(head==NULL){
+            
+            
+            cout<<"List is empty"<<endl;
+            
+
+        }
+        else{
+            Node* temp=head;
+            
+            
+            temp=temp->next;
+            
+            while(temp->next->next!=head){
+                
+                    temp=temp->next;
+                }
+                Node* temp1=temp;
+                temp1=temp1->next;
+                temp1->next=NULL;
+                if(temp!=NULL){
+                temp->next=head;}
+                delete temp1;
+
+            
+            
+            
+            
+        }
+        
+
+           
+            
+        }
+        
+    
+
+    void deleteAny(int key){
+       
+        Node* temp1=head;
+        if(head==NULL){
+            
+            
+            cout<<"List is empty"<<endl;
+            
+
+        }
+        else{
+            if(temp1->val==key){
+                deleteBeg();
+            }
+            else{
+                
+                Node*temp2=temp1;
+                temp1=temp1->next;
+            
+            while(temp1!=head){
+                if(temp1->val==key){
+                    temp2->next=temp1->next;
+                    temp1->next=NULL;
+                    
+                    cout<<"Element deleted"<<endl;
+                    break;
+                }
+                else{
+                    temp2=temp1;
+                    temp1=temp1->next;
+                }
+            }
+            if(temp1==head){
+                cout<<"Element not found"<<endl;
+
+            }
+        }
+            
+        }}
+
+    
+    void print(){
+        Node* temp=head;
+        cout<<temp->val<<"->";
+        temp=temp->next;
+        while(temp!=head){
+            
+            cout<<temp->val<<"->";
+            temp=temp->next;
+        }
+        cout<<temp->val<<endl;;
+    }
+
+
+};
+
+void menu(cll list){
+    cout<<"Which operation do you want to perform:-"<<endl;
+    bool t=true;
+    while(t){
+        cout<<"1.Insert at head."<<endl;
+        cout<<"2.Insert at tail."<<endl;
+        cout<<"3.Insert after a specific node."<<endl;
+        cout<<"4.Search for a number."<<endl;
+        cout<<"5.Delete from front."<<endl;
+        cout<<"6.Delete from tail."<<endl;
+        cout<<"7.Delete a specific node."<<endl;
+        cout<<"8.Display the doubly linked list."<<endl;
+        cout<<"9.Exit."<<endl;
+        int choice=0;
+        cin>>choice;
+        switch(choice){
+            case 1:
+            cout<<"What element to be inserted:-";
+            int a;
+            cin>>a;
+            list.insertFirst(a);
+            break;
+
+            case 2:
+            cout<<"What element to be inserted:-";
+            cin>>a;
+            list.insertBack(a);
+            break;
+
+            case 3:
+            cout<<"What element to be inserted:-";
+            cin>>a;
+            cout<<"After which element should be inserted:-";
+            int b;
+            cin>>b;
+            list.insertAfter(a,b);
+            break;
+
+            case 4:
+            cout<<"What element to find:-";
+            cin>>a;
+            list.search(a);
+            break;
+
+            
+            case 5:
+            list.deleteBeg();
+            break;
+
+            case 6:
+            list.deleteEnd();
+            break;
+
+            case 7:
+            cout<<"What element to delete:-";
+            cin>>a;
+            list.deleteAny(a);
+            break;
+
+            case 8:
+            list.print();
+            break;
+
+            case 9:
+            t=false;
+            break;
+
+
+
+        
+            
+
+
+        }
+        
+        
+        
+        
+        
+        
+    }
+
+}
+    
+
+int main(){
+    cll list;
+    menu(list);
+
+}
