@@ -19,10 +19,10 @@ class Solution {
   public:
     pair<Node *, Node *> splitList(struct Node *head) {
         // code here
-        Node* first=head;;
+      
         Node* mid1;
         Node* mid2;
-        Node* last;
+      
         Node*temp=head;
         if(temp->next==head){
             return make_pair(head,nullptr);
